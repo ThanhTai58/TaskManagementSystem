@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - TaskManagementSystem_FinalProject</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/TaskManagementSystem_FinalProject.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+
+    <style>
+        .navbar-nav .nav-link:hover {
+            color: #fff;
+        }
+
+        .dropdown-menu .dropdown-item:hover {
+            background-color: #0dcaf0;
+        }
+
+        .footer i {
+            font-size: 2em; /* Kích thước biểu tượng lớn hơn */
+            color: #000; /* Màu đen */
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="font-size: 1.2rem; font-weight: bold;">
+                    Task Management System
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <button class="nav-link text-dark btn btn-link" type="button" onclick="window.location.href='@Url.Action("Index", "Home")'">Home</button>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <button class="nav-link dropdown-toggle text-dark btn btn-link" type="button" data-bs-toggle="dropdown" aria-expanded="false">Management</button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <form method="post" action="/ProjectHelper/CreateNotificationFromProject">
+                                        <button class="dropdown-item" type="submit">Project Helper</button>
+                                        <input name="__RequestVerificationToken" type="hidden" value="CfDJ8FIHaSx6ZHhFv6sEHpUIvMOTljB2AUMdI35EJ9rWN7bophBE5yoMOK__IZMJbxq_v44Gx5mI74J8SztJSeT5ItO3uvTzxGaPrNifSwtDJ1cE4B-WQ9XRYSa9CGTXOjjjKSyHkFaEo4WDxz9xJ3Rv_V4">
+                                    </form>
+                                </li>
+                                <li>
+                                    <button class="dropdown-item btn btn-link" type="button" onclick="window.location.href='@Url.Action("Index", "UserManager")'">User Manager</button>
+                                </li>
+                                <li>
+                                    <button class="dropdown-item btn btn-link" type="button" onclick="window.location.href='@Url.Action("Index", "TaskHelper")'">Task Helper</button>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <form method="get" action="@Url.Action("Index", "Developer")">
+                                        <button class="dropdown-item" type="submit">Developer Helper</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <button class="nav-link dropdown-toggle text-dark btn btn-link" type="button" data-bs-toggle="dropdown" aria-expanded="false">Microsoft Resources</button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-5.0">ASP.NET Core Documentation</a></li>
+                                <li><a class="dropdown-item" href="https://learn.microsoft.com/en-us/visualstudio/get-started/csharp/">C# Guide</a></li>
+                                <li><a class="dropdown-item" href="https://docs.microsoft.com/en-us/dotnet/">.NET Documentation</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="https://learn.microsoft.com/en-us/training/">Microsoft Learn</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item">
+                            <button class="nav-link text-dark btn btn-link" type="button" onclick="window.location.href='@Url.Action("Privacy", "Home")'">Privacy</button>
+                        </li>
+                    </ul>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()   
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container d-flex justify-content-between align-items-center">
+            <span>&copy; 2024 - <strong>Task Management</strong> - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></span>
+            <div>
+                <a href="https://www.youtube.com/" class="text-decoration-none me-3" target="_blank">
+                    <i class="fab fa-youtube fa-2x text-dark"></i>
+                </a>
+                <a href="https://github.com/" class="text-decoration-none me-3" target="_blank">
+                    <i class="fab fa-github fa-2x text-dark"></i>
+                </a>
+                <a href="https://www.facebook.com/" class="text-decoration-none me-3" target="_blank">
+                    <i class="fab fa-facebook fa-2x text-dark"></i>
+                </a>
+                <a href="https://www.instagram.com/" class="text-decoration-none me-3" target="_blank">
+                    <i class="fab fa-instagram fa-2x text-dark"></i>
+                </a>     
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Assign User";
+}
+
+<h1 class="mb-4 text-center">Assign User</h1>
+<hr />
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <form asp-action="AssignUser" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+            <input type="hidden" value="@ViewBag.ProjectId" name="projectId" />
+            <h4 class ="mb-3">Select User for Assigning</h4>
+            <div class="mb-3">
+                <label for="userId" class="form-label">User:</label>
+                <select id="userId" name="userId" class="form-control" asp-items="@ViewBag.UserList"></select>
+            </div>
+
+            <div class="mb-3">
+                <label for="startDate" class="form-label">Start Date:</label>
+                <input id="startDate" name="startDate" type="date" class="form-control" placeholder="Start Date" />
+            </div>
+
+            <div class="mb-3">
+                <label for="endDate" class="form-label">End Date:</label>
+                <input id="endDate" name="endDate" type="date" class="form-control" placeholder="End Date" />
+            </div>
+
+            <div class="mb-3">
+                <input type="submit" value="Create" class="btn btn-primary me-2" />
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>

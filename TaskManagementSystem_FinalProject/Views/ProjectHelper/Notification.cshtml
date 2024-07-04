@@ -1,0 +1,43 @@
+﻿@model IEnumerable<TaskManagementSystem_FinalProject.Models.Notification>
+
+@{
+    ViewData["Title"] = "Notification";
+}
+
+<div class="container mt-4">
+    <h1 class="text-center fw-bold mb-4">Notification (unopened: @ViewBag.NumOfNotice)</h1>
+    <div><hr class="dropdown-divider"></div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>@Html.DisplayNameFor(model => model.Isopen)</th>
+                <th>@Html.DisplayNameFor(model => model.Project)</th>
+                <th>Developer</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Isopen)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Project.Name)</td>
+                    <td>@Html.DisplayFor(modelItem => item.AppUser.UserName)</td>
+                    <td>
+                        <form asp-action="Notification" method="post">
+                            <input type="hidden" name="isOpen" value="true">
+                            <input type="hidden" name="id" value="@item.Id">
+                            <input type="hidden" name="nNumber" value="@ViewBag.NumOfNotice">
+                            <button type="submit" class="btn btn-primary">Open</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a asp-action="Index" class="btn btn-secondary">Back to the Project helper page</a>
+</div>

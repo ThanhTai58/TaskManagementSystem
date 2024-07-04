@@ -1,0 +1,41 @@
+﻿@model TaskManagementSystem_FinalProject.Models.AppTask
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1 class="mb-4 text-center">Edit Task</h1>
+<div><hr class="dropdown-divider"></div>
+
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <form asp-action="EditPercentage" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+            <input type="hidden" asp-for="Id" />
+
+            <!-- Hidden fields for Name, Comment, ProjectId, and AppUserId -->
+            <input asp-for="Name" type="hidden" />
+            <input asp-for="Comment" type="hidden" />
+            <input asp-for="ProjectId" type="hidden" />
+            <input asp-for="AppUserId" type="hidden" />
+            <h4>
+                <div class="mb-3">
+                    <label asp-for="CompletePercentage" class="form-label">Complete Percentage:</label>
+                    <input asp-for="CompletePercentage" class="form-control" />
+                    <span asp-validation-for="CompletePercentage" class="text-danger"></span>
+                </div>
+            </h4>
+           
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

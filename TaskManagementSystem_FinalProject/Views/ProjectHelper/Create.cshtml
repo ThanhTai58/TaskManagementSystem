@@ -1,0 +1,46 @@
+﻿@model TaskManagementSystem_FinalProject.Models.Project
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1 class="mb-4 text-center">Create Project</h1>
+<div><hr class="dropdown-divider"></div>
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <h4>
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label">Project Name</label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </h4>
+            <div class="mb-3">
+                <label asp-for="Budget" class="form-label">Budget</label>
+                <input asp-for="Budget" class="form-control" />
+                <span asp-validation-for="Budget" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="StartDate" class="form-label">Start Date</label>
+                <input asp-for="StartDate" class="form-control" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="DeadLine" class="form-label">Deadline</label>
+                <input asp-for="DeadLine" class="form-control" />
+                <span asp-validation-for="DeadLine" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+            <div class="mb-3">
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>

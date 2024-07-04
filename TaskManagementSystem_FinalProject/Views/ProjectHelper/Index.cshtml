@@ -1,0 +1,95 @@
+﻿@model ViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container mt-4">
+    <h1 class="text-center fw-bold mb-4">Project List</h1>
+    <div><hr class="dropdown-divider"></div>
+
+    <div class="d-flex flex-wrap justify-content-start gap-3 mb-3">
+        <div>
+            <a asp-action="Notification" class="btn btn-warning" asp-route-nNumber="@ViewBag.NumOfNotice">@ViewBag.NumOfNotice Notification</a>
+        </div>
+        <div>
+            <a asp-action="Create" class="btn btn-primary">Create New</a>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <strong>Task List: </strong>
+        <a asp-action="Index" asp-route-ishideComplete="false" asp-route-priority="@ViewBag.Priority" class="btn btn-outline-success">Show Complete Tasks</a>
+        <a asp-action="Index" asp-route-ishideComplete="true" asp-route-priority="@ViewBag.Priority" class="btn btn-outline-success">Hide Complete Tasks</a>
+    </div>
+
+    <div class="mb-3">
+        <strong>Pick List: </strong>
+        <a asp-action="Index" asp-route-priority="ExceededCost" asp-route-IsHideComplete="@ViewBag.IsHideComplete" class="btn btn-outline-primary">Exceeded Cost Project</a>
+        <a asp-action="Index" asp-route-priority="Finish" asp-route-IsHideComplete="@ViewBag.IsHideComplete" class="btn btn-outline-primary">Finished Project</a>
+    </div>
+
+
+    <div class="mb-3">
+        <strong>Sort: </strong>
+        <a asp-action="Index" asp-route-priority="Newest" asp-route-IsHideComplete="@ViewBag.IsHideComplete" class="btn btn-outline-primary">Newest</a>
+        <a asp-action="Index" asp-route-priority="DeadLine" asp-route-IsHideComplete="@ViewBag.IsHideComplete" class="btn btn-outline-primary">DeadLine</a>
+        <a asp-action="Index" asp-route-priority="Budget" asp-route-IsHideComplete="@ViewBag.IsHideComplete" class="btn btn-outline-primary">Budget</a>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Budget</th>
+                <th>Total Cost</th>
+                <th>Project Members</th>
+                <th>StartDate</th>
+                <th>DeadLine</th>
+                <th>Tasks</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.projects)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td>$@item.Budget</td>
+                    <td>
+                        <div>
+                            <a asp-action="TotalCostDetails" asp-route-id="@item.Id">$@item.TotalCost()</a>
+                        </div>
+                        @if (item.TotalCost() > item.Budget)
+                        {
+                            <p class="btn btn-outline-danger">Exceeded!</p>
+                        }
+                    </td>
+                    <td>
+                        @foreach (var pu in item.ProejectAndUsers)
+                        {
+                            <div>@pu.AppUser.UserName</div>
+                            <div style="font-size:small">(@pu.StartDate.ToString("MM/dd/yyyy")~@pu.EndDate.ToString("MM/dd/yyyy"))</div>
+                        }
+                    </td>
+                    <td>@item.StartDate.ToString("MM/dd/yyyy")</td>
+                    <td>@item.DeadLine.ToString("MM/dd/yyyy")</td>
+                    <td>
+                        @foreach (var task in item.AppTasks)
+                        {
+                            <div>@task.Name (@task.CompletePercentage%) - @if (task.AppUser != null)
+                                {
+                                    @task.AppUser.UserName
+                                }</div>
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="AssignUser" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm">Assign User</a>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-info btn-sm">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

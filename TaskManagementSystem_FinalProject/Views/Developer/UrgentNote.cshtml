@@ -1,0 +1,37 @@
+﻿@model TaskManagementSystem_FinalProject.Models.Notification
+
+@{
+    ViewData["Title"] = "UrgentNote";
+}
+
+<h1 class="mb-4 text-center">Create Urgent Note</h1>
+<div><hr class="dropdown-divider"></div>
+
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <form asp-action="UrgentNote" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+            <h4>
+                <div class="mb-3">
+                    <label asp-for="Description" class="form-label">Description:</label>
+                    <input name="description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </h4>         
+            <!-- Hidden fields for userId and taskId -->
+            <input name="userId" value="@ViewBag.AppUserId" type="hidden" />
+            <input name="taskId" value="@ViewBag.TaskId" type="hidden" />
+
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Create</button>
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

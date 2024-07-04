@@ -1,0 +1,29 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model List<IdentityRole>
+
+@{
+    ViewData["Title"] = "Create Role";
+}
+
+<h1 class="mb-4 text-center">Create Role</h1>
+<hr />
+
+<h3 class="mb-3">All Roles:</h3>
+<div class="d-flex flex-wrap">
+    @foreach (var role in Model)
+    {
+        <div class="badge bg-secondary text-white m-1">@role.Name</div>
+    }
+</div>
+
+<h3 class="mb-3">Input the Role Name:</h3>
+<form method="post" asp-action="CreateRole" class="form-inline">
+    <div class="form-group mb-2">
+        <input type="text" name="rolename" class="form-control me-2" placeholder="Enter role name" style="width: auto; max-width: 300px;" />
+    </div>
+    
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary me-2">Submit</button>
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
+</form>

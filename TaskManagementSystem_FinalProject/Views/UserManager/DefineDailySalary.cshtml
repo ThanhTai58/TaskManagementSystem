@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "DefineDailySalary";
+}
+
+<h1>DefineDailySalary</h1>
+<hr />
+<form method="post" asp-action="DefineDailySalary">
+    <input name="id" type="hidden" value="@ViewBag.UserId" />
+    <div class="mb-3 style="width: 200px;">
+        <label for="salary">Define Salary:</label>
+        <input name="salary" id="salary" type="number" class="form-controlstyle=" width: 100%;" />
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary me-2">Submit</button>
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
+</form>

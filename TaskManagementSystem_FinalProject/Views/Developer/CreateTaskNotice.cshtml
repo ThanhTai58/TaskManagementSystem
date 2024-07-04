@@ -1,0 +1,80 @@
+﻿@{
+    ViewData["Title"] = "Create Task Notice";
+}
+
+<h1>Create Task Notice</h1>
+
+<hr />
+
+<div class="alert alert-info">
+    Click the button below to generate notices for tasks based on their deadlines.
+</div>
+
+<form asp-action="CreateTaskNotice" method="post">
+    <div class="form-group">
+        <input type="submit" value="Generate Notices" class="btn btn-primary" />
+    </div>
+</form>
+
+@if (ViewBag.NoticesCreated != null)
+{
+    <div class="alert alert-success mt-3">
+        <p>@ViewBag.NoticesCreated notices have been created.</p>
+    </div>
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger mt-3">
+        <p>Error: @ViewBag.Error</p>
+    </div>
+}
+
+<hr />
+
+<div class="mb-4">
+    <span class="fw-bold">Number Of Notices:</span>
+    <a asp-action="NoticePage" class="ms-2">@ViewBag.NumberOfNotice notice(s)</a>
+</div>
+
+@if (Model != null)
+{
+    <h1 class="mb-4">@ViewBag.UserName's List of Notices</h1>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var task in Model)
+            {
+                foreach (var notice in task.Notifications)
+                {
+                    if (!notice.Isopen)
+                    {
+                        <tr>
+                            <td>
+                                <h3>@notice.Description</h3>
+                            </td>
+                            <td>
+                                <form asp-action="NoticePage" method="post" class="d-inline">
+                                    <input name="id" value="@notice.Id" type="hidden">
+                                    <button type="submit" class="btn btn-primary">Confirm</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                }
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No tasks found.</p>
+}
+
+<a asp-action="Index" class="btn btn-secondary mt-4">Back To Developer Page</a>

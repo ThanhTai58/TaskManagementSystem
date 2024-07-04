@@ -1,0 +1,25 @@
+﻿@model SelectList
+@{
+    ViewData["Title"] = "AssignTaskToProject";
+}
+
+<h1 class="mb-4 text-center">Assign Task To Project</h1>
+<hr />
+
+<h3 >Task Name: @ViewBag.TaskName</h3>
+<h4>Select Project To Assign</h4>
+
+<form asp-action="AssignTaskToProjectPost" method="post">
+    <input name="taskid" type="hidden" value="@ViewBag.TaskId" />
+    <div class="mb-2" style="width: 300px;">
+        <select name="projectid" asp-items="@Model" class="form-select" style="width: 100%;">
+            <option value="">Select Project</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a asp-action="Index" class="btn btn-secondary ms-2">Back to List</a>
+        </div>
+    </div>
+</form>

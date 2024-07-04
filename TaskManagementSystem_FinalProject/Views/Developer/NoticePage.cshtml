@@ -1,0 +1,46 @@
+﻿
+
+<div class="mb-4">
+    <span class="fw-bold">Number Of Notice:</span>
+    <a asp-action="NoticePage" class="ms-2">@ViewBag.NumberOfNotice notice(s)</a>  
+    @if (ViewBag.NumberOfNotice > 0)
+    {
+        <a asp-action="NoticePage" class="ms-2">@ViewBag.NumberOfNotice notice(s)</a>
+    }
+</div>
+
+@model TaskManagementSystem_FinalProject.Models.AppUser
+
+<h1 class="mb-4">@ViewBag.UserName's List of Notice</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Description</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var task in Model.AppTasks)
+        {
+            foreach (var notice in task.Notifications)
+            {
+                if (!notice.Isopen)
+                {
+                    <tr>
+                        <td>
+                            <h3>@notice.Description</h3>
+                        </td>
+                        <td>
+                            <form asp-action="NoticePage" method="post" class="d-inline">
+                                <input name="id" value="@notice.Id" type="hidden">
+                                <button type="submit" class="btn btn-primary">Confirm</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            }
+        }
+    </tbody>
+</table>
+<a asp-action="Index" class="btn btn-secondary mt-4">Back To Developer page</a>
